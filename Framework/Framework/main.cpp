@@ -3,7 +3,7 @@
 #include "Window.h"
 
 int main() {
-	sf::RenderWindow wnd(sf::VideoMode(Window::ScreenWidth, Window::ScreenHeight),L"Application");
+	sf::RenderWindow wnd(sf::VideoMode(Window::ScreenWidth, Window::ScreenHeight),L"Application",sf::Style::Titlebar|sf::Style::Close);
 	while (wnd.isOpen()) {
 		sf::Event event;
 		while (wnd.pollEvent(event)) {
