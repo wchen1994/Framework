@@ -7,6 +7,6 @@ public:
 	FrameTimer();
 	float Mark();
 private:
-	std::chrono::system_clock::time_point curtime;
-	std::chrono::system_clock::time_point lasttime;
+	std::chrono::steady_clock::time_point curtime;
+	std::chrono::steady_clock::time_point lasttime;
 };
