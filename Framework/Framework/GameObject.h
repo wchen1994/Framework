@@ -1,14 +1,15 @@
 #pragma once
 
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
+#include <memory>
 
-class GameObject : public sf::Transformable, public sf::Drawable {
+class GameObject : public sf::Transformable{
 public:
 	GameObject();
 	virtual void Start() {};
 	virtual void Update(float& dt) {};
 	virtual void FixedUpdate(float& dt) {};
+	void Draw(sf::RenderTarget& rt) const;
 private:
-	sf::VertexArray vertexes;
-	sf::Color color;
+	std::shared_ptr<sf::Drawable> ptDraw;
 };

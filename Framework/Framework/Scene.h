@@ -10,6 +10,7 @@ public:
 	Scene(float fixUpdateMillisecond);
 	Scene(int framePerSecond);
 	void SceneUpdate();
+	void SceneDraw();
 	void RegisterLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag);
 	void RemoveFromLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag);
 private:

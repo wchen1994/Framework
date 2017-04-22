@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Window.h"
 
 Scene::Scene(float fixUpdateDuration)
 	:
@@ -13,7 +14,7 @@ Scene::Scene(int framePerSecond=30)
 	ft()
 {
 	Start();
-	this->fixUpdateDuration = 1000000 / framePerSecond;
+	this->fixUpdateDuration = 1.0f / framePerSecond;
 }
 
 void Scene::SceneUpdate()
@@ -29,6 +30,15 @@ void Scene::SceneUpdate()
 	while (culmulativeDuration >= fixUpdateDuration) {
 		FixedUpdate(fixUpdateDuration);
 		culmulativeDuration -= fixUpdateDuration;
+	}
+}
+
+void Scene::SceneDraw()
+{
+	for (auto it = defaultLayer.begin();
+		it != defaultLayer.end();
+		it++) {
+		(*it)->Draw(Window::wnd);
 	}
 }
 
@@ -51,8 +61,7 @@ void Scene::Start()
 	for (auto it = defaultLayer.begin();
 		it != defaultLayer.end();
 		it++) {
-		std::shared_ptr<GameObject> gameObj = *it;
-		gameObj->Start();
+		(*it)->Start();
 	}
 }
 
@@ -61,8 +70,7 @@ void Scene::Update(float& dt)
 	for (auto it = defaultLayer.begin();
 		it != defaultLayer.end();
 		it++) {
-		std::shared_ptr<GameObject> gameObj = *it;
-		gameObj->Update(dt);
+		(*it)->Update(dt);
 	}
 }
 

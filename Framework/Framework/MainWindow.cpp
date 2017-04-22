@@ -8,24 +8,24 @@
 #pragma comment(lib, "sfml-system.lib")
 
 int main() {
-	sf::RenderWindow wnd(sf::VideoMode(Window::ScreenWidth, Window::ScreenHeight),L"Application",sf::Style::Titlebar|sf::Style::Close);
 	Scene mainScene(30);
 	FrameTimer ft;
 	
-	while (wnd.isOpen()) {
+	while (Window::wnd.isOpen()) {
 		sf::Event event;
-		while (wnd.pollEvent(event)) {
+		while (Window::wnd.pollEvent(event)) {
 			sf::Event::EventType eventType = event.type;
 			switch (eventType) {
 			case sf::Event::Closed:
-				wnd.close();
+				Window::wnd.close();
 				break;
 			}
 		}
 		
 		mainScene.SceneUpdate();
 
-		wnd.clear();
-		wnd.display();
+		Window::wnd.clear();
+		Window::wnd.display();
 	}
+	
 }
