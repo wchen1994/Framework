@@ -1,6 +1,7 @@
 #pragma once
 
-#include<set>
+#include <set>
+#include <memory>
 #include "FrameTimer.h"
 #include "GameObject.h"
 
@@ -9,6 +10,8 @@ public:
 	Scene(float fixUpdateMillisecond);
 	Scene(int framePerSecond);
 	void SceneUpdate();
+	void RegisterLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag);
+	void RemoveFromLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag);
 private:
 	void Start();
 	void Update(float& dt);
@@ -18,5 +21,6 @@ private:
 	FrameTimer ft;
 	float fixUpdateDuration;
 	float culmulativeDuration = 0.0f;
-	std::set<GameObject*> gameObjects;
+	// unique set not have duplicate element
+	std::set<std::shared_ptr<GameObject>> defaultLayer;
 };

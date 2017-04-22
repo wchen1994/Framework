@@ -32,32 +32,46 @@ void Scene::SceneUpdate()
 	}
 }
 
+void Scene::RegisterLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag)
+{
+	if (flag | (uint32_t)0x00000001) {
+		defaultLayer.insert(gameObj);
+	}
+}
+
+void Scene::RemoveFromLayer(std::shared_ptr<GameObject> gameObj, uint32_t flag)
+{
+	if (flag | (uint32_t)0x00000001) {
+		defaultLayer.erase(gameObj);
+	}
+}
+
 void Scene::Start()
 {
-	for (auto it = gameObjects.begin();
-		it != gameObjects.end();
+	for (auto it = defaultLayer.begin();
+		it != defaultLayer.end();
 		it++) {
-		GameObject* gameObj = *it;
+		std::shared_ptr<GameObject> gameObj = *it;
 		gameObj->Start();
 	}
 }
 
 void Scene::Update(float& dt)
 {
-	for (auto it = gameObjects.begin();
-		it != gameObjects.end();
+	for (auto it = defaultLayer.begin();
+		it != defaultLayer.end();
 		it++) {
-		GameObject* gameObj = *it;
+		std::shared_ptr<GameObject> gameObj = *it;
 		gameObj->Update(dt);
 	}
 }
 
 void Scene::FixedUpdate(float& dt)
 {
-	for (auto it = gameObjects.begin();
-		it != gameObjects.end();
+	for (auto it = defaultLayer.begin();
+		it != defaultLayer.end();
 		it++) {
-		GameObject* gameObj = *it;
+		std::shared_ptr<GameObject> gameObj = *it;
 		gameObj->FixedUpdate(dt);
 	}
 }
