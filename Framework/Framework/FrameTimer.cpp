@@ -11,5 +11,5 @@ float FrameTimer::Mark()
 	std::chrono::duration<float> runtime = curtime - lasttime;
 	lasttime = curtime;
 	// return in microsecond
-	return runtime.count() * 1000000;
+	return runtime.count();
 }
